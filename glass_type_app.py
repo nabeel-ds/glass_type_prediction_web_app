@@ -1,6 +1,3 @@
-# S2.1: Open Sublime text editor, create a new Python file, copy the following code in it and save it as 'glass_type_app.py'.
-# You have already created this ML model in ones of the previous classes.
-
 # Importing the necessary Python modules.
 import streamlit as st
 import pandas as pd
@@ -39,8 +36,7 @@ y = glass_df['GlassType']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
 
 
-# S3.1: Create a function that accepts an ML model object say 'model' and the nine features as inputs 
-# and returns the glass type.
+# Create a function that accepts an ML model object say 'model' and the nine features as inputs and returns the glass type.
 
 feature_cols = ['RI', 'Na', 'Mg', 'Al', 'Si', 'K', 'Ca', 'Ba', 'Fe']
 
@@ -63,26 +59,16 @@ def prediction(model, feat_col):
     else:
         return "headlamps".upper()
 
-# S4.1: Add title on the main page and in the sidebar.
 st.title("Glass Type prediction Web app")
 st.sidebar.title("Glass Type prediction Web app")
 
-# S5.1: Using the 'if' statement, display raw data on the click of the checkbox.
 if st.sidebar.checkbox("Show raw data"):
     st.subheader("Glass Type Data set")
     st.dataframe(glass_df)
 
-# S6.1: Add a multiselect widget to allow the user to select multiple visualisation.
-# Add a subheader in the sidebar with label "Visualisation Selector"
 st.sidebar.subheader("Visualisation Selector")
-
-# Add a multiselect in the sidebar with label 'Select the Charts/Plots:'
-# and with 6 options passed as a tuple ('Correlation Heatmap', 'Line Chart', 'Area Chart', 'Count Plot','Pie Chart', 'Box Plot').
-# Store the current value of this widget in a variable 'plot_list'.
 plot_list = st.sidebar.multiselect("Select the Charts/Plots:",
                                    ('Correlation Heatmap', 'Line Chart', 'Area Chart', 'Count Plot','Pie Chart', 'Box Plot'))
-
-# S6.2: Display Streamlit native line chart and area chart
 
 # Display line chart 
 if 'Line Chart' in plot_list:
@@ -94,7 +80,7 @@ if 'Area Chart' in plot_list:
     st.subheader("Area Chart")
     st.area_chart(glass_df)
 
-# S6.3: Display the plots when the user selects them using multiselect widget.
+# Display the plots when the user selects them using multiselect widget.
 
 # import 'seaborn' and 'matplotlib.pyplot' module.
 import seaborn as sns
@@ -125,7 +111,7 @@ if 'Pie Chart' in plot_list:
     st.pyplot()
 
 
-# S6.4: Display box plot using matplotlib module and 'st.pyplot()'
+# Display box plot using matplotlib module and 'st.pyplot()'
 if 'Box Plot' in plot_list:
     st.subheader("Box Plot")
     column = st.sidebar.selectbox("Select the column for boxplot",
@@ -135,7 +121,7 @@ if 'Box Plot' in plot_list:
     st.pyplot()
 
 
- # Add 9 slider widgets for accepting user input for 9 features.
+# Add 9 slider widgets for accepting user input for 9 features.
 st.sidebar.subheader("Select your values:")
 ri = st.sidebar.slider("Input Ri", float(glass_df['RI'].min()), float(glass_df['RI'].max()))
 na = st.sidebar.slider("Input Na", float(glass_df['Na'].min()), float(glass_df['Na'].max()))
